@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -41,6 +43,12 @@ GEM
       activerecord (>= 3.0.0)
     arel (6.0.0)
     awesome_print (1.6.1)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -49,6 +57,7 @@ GEM
     columnize (0.9.0)
     coolline (0.5.0)
       unicode_utils (~> 1.4)
+    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     diffy (3.0.7)
@@ -176,7 +185,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   ancestry
+  better_errors
+  binding_of_caller
   jazz_fingers
   pg
   rails (= 4.2.1)

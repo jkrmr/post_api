@@ -28,19 +28,23 @@ ActiveRecord::Schema.define(version: 20150517171533) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
   create_table "images", force: :cascade do |t|
-    t.string   "url"
+    t.integer  "post_id"
+    t.string   "url",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "images", ["post_id"], name: "index_images_on_post_id", using: :btree
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title",                      null: false
-    t.text     "content",                    null: false
+    t.string   "title",                          null: false
+    t.text     "content",                        null: false
+    t.boolean  "archived",       default: false
     t.integer  "comments_count", default: 0
     t.integer  "images_count",   default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -54,5 +58,6 @@ ActiveRecord::Schema.define(version: 20150517171533) do
   end
 
   add_foreign_key "comments", "posts"
+  add_foreign_key "images", "posts"
   add_foreign_key "posts", "users"
 end
