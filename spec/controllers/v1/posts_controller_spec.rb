@@ -3,36 +3,60 @@ require 'rails_helper'
 describe V1::PostsController, type: :controller do
   describe 'GET #index' do
     it 'returns http success' do
-      get :index
+      get :index, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET #create' do
+  describe 'POST #create' do
     it 'returns http success' do
-      get :create
+      user = FactoryGirl.create(:user)
+
+      post :create, post: post_params(user_id: user.id), format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe 'GET #show' do
     it 'returns http success' do
-      get :show
+      post = FactoryGirl.create(:post)
+
+      get :show, id: post.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET #update' do
+  describe 'PUT #update' do
     it 'returns http success' do
-      get :update
+      post = FactoryGirl.create(:post)
+
+      put :update, id: post, post: post_params(title: 'Edited'), format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET #destroy' do
+  describe 'DELETE #destroy' do
     it 'returns http success' do
-      get :destroy
+      post = FactoryGirl.create(:post)
+
+      delete :destroy, id: post, post: post_params(post: post), format: :json
+
       expect(response).to have_http_status(:success)
     end
+  end
+
+  def post_params(overrides={})
+    post = overrides[:post]
+
+    attrs = if post
+              { title: post.title, content: post.content, user_id: post.user_id }
+            else
+              { title: 'New Post', content: 'Post contents.' }
+            end
+    attrs.merge(overrides)
   end
 end
