@@ -38,7 +38,7 @@ module V1
     def destroy
       if @post
         @post.archive
-        head 204
+        head :no_content
       else
         render json: {}, status: :not_found
       end
