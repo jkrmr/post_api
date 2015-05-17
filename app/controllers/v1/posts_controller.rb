@@ -1,6 +1,5 @@
 module V1
   class PostsController < ApplicationController
-    before_action :ensure_json_request
     before_action :find_post, only: %i(show update destroy)
 
     def index
@@ -9,7 +8,9 @@ module V1
     end
 
     def create
-      @post = Post.new(post_params)
+      author_id = post_params.delete(:user_id)
+      @author   = User.find_by(id: author_id)
+      @post     = Post.new(post_params) { |post| post.author = @author }
 
       if @post.save
         render json: @post
@@ -51,12 +52,6 @@ module V1
 
     def find_post
       @post = Post.find_by(id: params[:id])
-    end
-
-    # Forbids non-json requests
-    def ensure_json_request
-      return if params[:format] == 'json' || request.headers['Accept'] =~ /json/
-      render nothing: true, status: :not_acceptable
     end
   end
 end
