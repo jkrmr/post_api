@@ -1,7 +1,6 @@
 module V1
   class PostsController < ApplicationController
-    # Forbids non-json requests. Disabled for testing via root route
-    # before_action :ensure_json_request
+    before_action :ensure_json_request
     before_action :find_post, only: %i(show update destroy)
 
     def index
@@ -47,13 +46,14 @@ module V1
     private
 
     def post_params
-      params.require(:post).permit(:title, :content, :author_id)
+      params.require(:post).permit(:title, :content, :user_id)
     end
 
     def find_post
       @post = Post.find_by(id: params[:id])
     end
 
+    # Forbids non-json requests
     def ensure_json_request
       return if params[:format] == 'json' || request.headers['Accept'] =~ /json/
       render nothing: true, status: :not_acceptable
