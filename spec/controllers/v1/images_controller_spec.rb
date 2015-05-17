@@ -1,9 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe V1::ImagesController, type: :controller do
+describe V1::ImagesController, type: :controller do
   describe 'GET #create' do
     it 'returns http success' do
-      get :create
+      parent = FactoryGirl.create(:post)
+
+      post :create, post_id: parent, image: image_params, format: :json
 
       expect(response).to have_http_status(:success)
     end
@@ -11,9 +13,15 @@ RSpec.describe V1::ImagesController, type: :controller do
 
   describe 'GET #destroy' do
     it 'returns http success' do
-      get :destroy
+      image = FactoryGirl.create(:image)
+
+      delete :destroy, post_id: image.post, id: image, format: :json
 
       expect(response).to have_http_status(:success)
     end
+  end
+
+  def image_params
+    { url: 'http://example.com/image.jpg' }
   end
 end
