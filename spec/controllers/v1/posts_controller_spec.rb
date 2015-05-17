@@ -50,10 +50,8 @@ describe V1::PostsController, type: :controller do
   end
 
   def post_params(overrides={})
-    post = overrides[:post]
-
-    attrs = if post
-              { title: post.title, content: post.content, user_id: post.user_id }
+    attrs = if post = overrides[:post]
+              post.slice(:title, :content, :user_id)
             else
               { title: 'New Post', content: 'Post contents.' }
             end
