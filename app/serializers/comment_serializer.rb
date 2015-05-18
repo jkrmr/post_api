@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :author_name, :author_city
+  attributes :id, :content, :author_name, :author_city, :children
 
   def author_name
     object.author.name
