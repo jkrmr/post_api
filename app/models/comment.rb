@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  include Loggable
   belongs_to :author, class_name: 'User', foreign_key: :user_id
   belongs_to :commentable, polymorphic: true
   has_ancestry

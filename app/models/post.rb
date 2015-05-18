@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include Loggable
   belongs_to :author, class_name: 'User', foreign_key: :user_id
   has_many :comments, as: :commentable, dependent: :destroy, counter_cache: true
   has_many :images, dependent: :destroy, counter_cache: true

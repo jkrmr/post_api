@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       resources :images, only: %i(create destroy)
       resources :comments, only: %i(index create destroy)
     end
+
+    resources :reports, only: %i(new)
   end
 
-  root to: 'v1/posts#index'
+  root to: 'v1/reports#new'
 end
