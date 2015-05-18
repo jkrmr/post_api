@@ -166,6 +166,8 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.3.6)
     spring-commands-rspec (1.0.4)
@@ -200,6 +202,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails-api
   rspec-rails
+  shoulda-matchers
   spring
   spring-commands-rspec
   validate_url
