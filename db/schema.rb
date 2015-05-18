@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150517171533) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
     t.text     "content",          null: false
     t.integer  "commentable_id",   null: false
     t.string   "commentable_type", null: false
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150517171533) do
   end
 
   add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.integer  "post_id"
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150517171533) do
     t.datetime "updated_at",              null: false
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "images", "posts"
   add_foreign_key "posts", "users"
 end
