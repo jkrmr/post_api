@@ -1,7 +1,8 @@
 module V1
   class ImagesController < ApplicationController
+    before_action :ensure_post_exists, except: :destroy
+
     def create
-      @post = Post.find_by(id: params[:post_id])
       @image = @post.images.build(image_params)
 
       if @image.save
