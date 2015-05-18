@@ -14,6 +14,8 @@ class Post < ActiveRecord::Base
   end
 
   def comments_thread
-    comments.arrange(order: :created_at)
+    ActiveModel::ArraySerializer.new(comments,
+      each_serializer: CommentSerializer
+    ).to_json
   end
 end
