@@ -2,5 +2,5 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   has_ancestry
 
-  validates :post, :content, presence: true
+  validates :content, :commentable_id, :commentable_type, presence: true
 end

@@ -1,8 +1,9 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.belongs_to :post, index: true, foreign_key: true, dependent: :delete
-      t.string :content, null: false
+      t.text :content, null: false
+      t.integer :commentable_id, null: false
+      t.string :commentable_type, null: false
       t.string :ancestry, index: true
 
       t.timestamps null: false

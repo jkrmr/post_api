@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User', foreign_key: :user_id
-  has_many :comments, dependent: :destroy, counter_cache: true
+  has_many :comments, as: :commentable, dependent: :destroy, counter_cache: true
   has_many :images, dependent: :destroy, counter_cache: true
 
   validates :author, :title, :content, presence: true
@@ -11,5 +11,9 @@ class Post < ActiveRecord::Base
   def archive
     self.archived = true
     save
+  end
+
+  def comments_thread
+    comments.arrange(order: :created_at)
   end
 end
