@@ -1,4 +1,4 @@
-[Post, Image, User, Comment].each(&:delete_all)
+[Image, Comment, Post, User].each(&:delete_all)
 
 user = User.create(name: 'PostApp User', city: 'San Francisco')
 
