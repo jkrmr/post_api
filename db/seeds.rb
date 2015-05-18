@@ -1,6 +1,6 @@
 [Image, Comment, Post, User].each(&:delete_all)
 
-user = User.create(name: 'PostApp User', city: 'San Francisco')
+user = User.create(name: 'PostApi User', city: 'San Francisco')
 
 posts_attrs = (1..20).map do |i|
   { title: "Post #{i}", content: "Post #{i} content." }

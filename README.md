@@ -1,5 +1,5 @@
-PostApp Api
-===========
+PostApi
+=======
 
 Installation
 ------------
