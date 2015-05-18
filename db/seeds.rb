@@ -7,7 +7,7 @@ posts_attrs = (1..20).map do |i|
 end
 
 comments_attrs = (1..5).map do |i|
-  { content: "Comment ##{i}" }
+  { content: "Comment ##{i}", author: user }
 end
 
 posts = Post.create(posts_attrs) do |post|
